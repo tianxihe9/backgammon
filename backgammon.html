@@ -4,13 +4,21 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <title>Backgammon</title>
 
-    <script id="vertex-shader" type="x-shader/x-vertex">
-      attribute vec4 vPosition;
+    <p>
+      <button id="play">Start The Game</button>
+    </p>
 
-      void main() {
-        gl_Position = vPosition;
-      }
-    </script>
+    <script id="vertex-shader" type="x-shader/x-vertex">
+attribute vec4 vPosition;
+uniform   mat4 modelView;
+uniform   mat4 projection;
+
+void
+main()
+{
+    gl_Position = projection * modelView * vPosition;
+}
+</script>
 
     <script id="fragment-shader" type="x-shader/x-fragment">
       precision mediump float;
