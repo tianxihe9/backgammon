@@ -4,68 +4,15 @@ var dice = [];
 var aspectRatio = 1.0;
 var cubeSize = 10;
 var cubeSize2 = cubeSize / 2.0;
-var t=0;
+var t=10;
 var start=false;
 var ready=false;
 var index = [
-  // TOP of Board
-  15, 12, 11, 8, 4, 10, 14, 8, 7, 13, 3, 10, 13, 14, 3, 8, 14, 9, 9, 10, 8, 11, 16, 15, 4, 10, 3, 3, 14, 7,
-
-  // Base
   1, 6, 2, 1, 6, 5,
-  // Front
-  1, 4, 3, 1, 3, 2,
-  // FrontLeft
-  11, 10, 18, 19, 11, 18,
-  // FrontRight
-  13, 20, 12, 20, 21, 13,
-  // Left
-  8, 4, 1, 1, 5, 8,
-  // Inner Left
-  18, 10, 9, 9, 17, 18,
-  // Back
-  7, 8, 5, 7, 5, 6,
-  // BackLeft
-  24, 9, 16, 24, 17, 9,
-  // BackRight
-  15, 14, 22, 22, 23, 15,
-  // Right
-  2, 3, 7, 7, 6, 2,
-  // Inner Right
-  14, 13, 21, 21, 22, 14,
-  // mid Right
-  15, 23, 12, 23, 20, 12,
-  // mid Left
-  16, 11, 19, 19, 24, 16,
-
-  // Black triangles
-  47, 48, 49,
-  43, 44, 45,
-  39, 40, 41,
-  33, 34, 35,
-  29, 30, 31,
-  25, 26, 27,
-  54, 56, 55,
-  58, 60, 59,
-  62, 64, 63,
-  68, 70, 69,
-  72, 74, 73,
-  76, 78, 77,
-
-  // White Triangles
-
-  49, 50, 51,
-  45, 46, 47,
-  41, 42, 43,
-  35, 36, 37,
-  31, 32, 33,
-  27, 28, 29,
-  52, 54, 53,
-  56, 58, 57,
-  60, 62, 61,
-  66, 68, 67,
-  70, 72, 71,
-  74, 76, 75
+  29, 30, 31, 25,26,27,21,22,23,15,16,17,11,12,13,7,8,9,36,38,37,40,42,41
+  ,44,46,45,50,52,51,54,56,55,58,60,59,31,32,33,27,28,29,23,24
+  ,25,17,18,19,13,14,15,9,10,11,34,36,35,38,40,39,42,44,43,48
+  ,50,49,52,54,53,56,58,57
 ]
 var verticesTest = [
   vec4(0, 0, 0, 1),//1
@@ -75,24 +22,7 @@ var verticesTest = [
   vec4(-4, 3, 0, 1),//5
   vec4(-4, 0, -26, 1),//6
   vec4(36, 0, -26, 1),//7
-  vec4(36, 3, -26, 1),//8
-  vec4(-4, 3, -26, 1),//9
-  vec4(1, 3, -25, 1),//10
-  vec4(1, 3, -1, 1),//11
-  vec4(15, 3, -1, 1),//12
-  vec4(17, 3, -1, 1),//13
-  vec4(31, 3, -1, 1),//14
-  vec4(31, 3, -25, 1),//15
-  vec4(17, 3, -25, 1),//16
-  vec4(15, 3, -25, 1),//17
-  vec4(1, 0, -25, 1),//18
-  vec4(1, 0, -1, 1),//19
-  vec4(15, 0, -1, 1),//20
-  vec4(17, 0, -1, 1),//21
-  vec4(31, 0, -1, 1),//22
-  vec4(31, 0, -25, 1),//23
-  vec4(17, 0, -25, 1),//24
-  vec4(15, 0, -25, 1),//25
+
 ];
 var colors = [
   vec4(0.5976, 0.2968, 0, 1.0),
@@ -174,7 +104,7 @@ function StartRender() {
   if(start && t!=90){
     t=t+0.5;
     ready=false;
-  }else if (!start && t!=0){
+  }else if (!start && t!=10){
     t=t-0.5;
     ready=false;
   }else if(t==90){
@@ -201,28 +131,16 @@ function ThreeDCalculation(){
 }
 
 function draw(){
-  gl.uniform4fv(colorLoc, colors[2]);
-  for (var i = 12; i < 14; i++) {
-    gl.drawElements(gl.TRIANGLES, 3, gl.UNSIGNED_BYTE, 3 * i);
-  }
-  gl.uniform4fv(colorLoc, colors[1]);
-  for (var i = 14; i < 36; i++) {
-    gl.drawElements(gl.TRIANGLES, 3, gl.UNSIGNED_BYTE, 3 * i);
-  }
-  gl.uniform4fv(colorLoc, colors[4]);
-  for (var i = 0; i < 10; i++) {
-    gl.drawElements(gl.TRIANGLES, 3, gl.UNSIGNED_BYTE, 3 * i);
-  }
   gl.uniform4fv(colorLoc, colors[0]);
-  for (var i = 10; i < 12; i++) {
+  for (var i = 0; i < 2; i++) {
     gl.drawElements(gl.TRIANGLES, 3, gl.UNSIGNED_BYTE, 3 * i);
   }
   gl.uniform4fv(colorLoc, colors[2]);
-  for (var i = 36; i < 48; i++) {
+  for (var i = 2; i < 14; i++) {
     gl.drawElements(gl.TRIANGLES, 3, gl.UNSIGNED_BYTE, 3 * i);
   }
   gl.uniform4fv(colorLoc, colors[3]);
-  for (var i = 48; i < 60; i++) {
+  for (var i = 14; i < 36; i++) {
     gl.drawElements(gl.TRIANGLES, 3, gl.UNSIGNED_BYTE, 3 * i);
   }
 }
